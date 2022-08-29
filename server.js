@@ -18,7 +18,7 @@ var server = http
       if (req.url == "/") {
         res.writeHead(200, headers);
         return res.end(
-          "Use the format http://thissite.com/proxy/http://site-i-want.com/ to access the proxy."
+          "Use the format https://kiwichat-proxy.cyclic.app/proxy/http://kiwichat.ml/ to access the proxy."
         );
       } else {
         res.writeHead(404, headers);
@@ -31,4 +31,4 @@ var server = http
 // allow unblocker to proxy websockets
 server.on("upgrade", unblocker.onUpgrade);
 
-console.log("proxy server live at http://localhost:8080/");
+console.log("proxy server live at https://kiwichat-proxy.cyclic.app/");
