@@ -1,9 +1,13 @@
 {
-  "name": "simple-unblocker-server",
+  "name": "impa",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dependencies": {
+    "express": "^4.18.1",
     "unblocker": "*"
+  },  
+  "engines": {
+    "node": ">=12"
   },
   "scripts": {
     "start": "node server.js"
