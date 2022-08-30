@@ -1,16 +1,13 @@
-"use strict";
-
 var http = require("http");
 var Unblocker = require("unblocker");
 
-var unblocker = Unblocker({});
+// var unblocker = Unblocker({});
+var unblocker = new Unblocker({prefix: '/impa/'});
 
-var server = http
-  .createServer(function (req, res) {
-    // first let unblocker try to handle the requests
-    unblocker(req, res, function (err) {
-      // this callback will be fired for any request that unblocker does not serve
-      var headers = { "content-type": "text/plain" };
+http
+  .createServer(function(req, res) {
+    unblocker(req, res, function(err) {
+      var headers = { "content-type": "text/html" };
       if (err) {
         res.writeHead(500, headers);
         return res.end(err.stack || err);
@@ -18,17 +15,19 @@ var server = http
       if (req.url == "/") {
         res.writeHead(200, headers);
         return res.end(
-          "Use the format https://kiwichat-proxy.cyclic.app/proxy/http://kiwichat.ml/ to access the proxy."
+
         );
       } else {
         res.writeHead(404, headers);
-        return res.end("Error 404: file not found.");
+        return res.end("ERROR 404: File Not Found.");
       }
     });
   })
   .listen(8080);
 
-// allow unblocker to proxy websockets
-server.on("upgrade", unblocker.onUpgrade);
+console.log("RCR OK");
 
-console.log("proxy server live at https://kiwichat-proxy.cyclic.app/");
+
+process.on('uncaughtException', function (err) {
+    console.log(err);
+});
